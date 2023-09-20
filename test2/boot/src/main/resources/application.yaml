@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: psgsys
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 111111
+server:
+  port: 8088
+debug: true
