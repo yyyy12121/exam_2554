@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.boot.dao.crimesDao">
+
+    <select id="selectBy" resultType="com.example.boot.vo.riskTopVo">
+select ROUND(a.risk_index,2) as risk_index,a.city,RANK() OVER (ORDER BY risk_index DESC) as'rank' from (
+  select count(*),sum(victims),(count(*)/#{days}*0.8)+(sum(victims)/#{days}*0.2) as risk_index,city from crimes where year(start_date_time) = #{year}
+  group by city) a order by a.risk_index desc LIMIT 3
+    </select>
+    <select id="selectYear" resultType="com.example.boot.vo.city">
+        select DISTINCT year(start_date_time) year from crimes order by year(start_date_time) desc
+    </select>
+</mapper>
